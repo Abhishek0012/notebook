@@ -14,15 +14,16 @@ router.post('/createuser', [
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
-    let user = User.findOne({email:req.body.email})
+    let user = await User.findOne({email:req.body.email})
     if(user)
     {
-        res.send.status(400).json({error : "user with same email alreay exists"})
+        res.status(400).json({error : "user with same email alreay exists"})
     }
     user = await User.create({
         name: req.body.name,
         password: req.body.password,
         email : req.body.email
-      }).then(user => res.json(user));
+      })
+      .then(user => res.json(user));
 })
 module.exports = router
