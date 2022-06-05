@@ -1,23 +1,23 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose')
 const { Schema } = mongoose;
 
 const notesSchema = new Schema({
      title : {
-       type : string ,
+       type : String ,
        required : true
    },
     description : {
-       type : string ,
+       type : String ,
        required : true ,
        unique : true
    },
    tage : {
-       type : string ,
+       type : String ,
        default : "general"
    },
    date : {
-       type : date ,
+       type : Date ,
        dafault : Date.now
    }
 });
-module.exports = mongoose.model('notes',notesSchema);
+module.exports = mongoose.model('Notes',notesSchema);
