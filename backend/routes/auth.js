@@ -42,6 +42,7 @@ router.post('/createuser', [
 
     } catch (error) {
         // console.error(error.message);
+        res.json(error.message);
         res.status(500).send("Some error has been occured")
     }
 })
@@ -66,12 +67,12 @@ router.post('/login', [
         {
             res.status(400).json({"error" : "Enter valid credentials"});
         }
-        const payLoad = {
+        const data = {
             user: {
                 id: user.id
             }
         }
-        const authToken = jwt.sign(payLoad, jwt_key);
+        const authToken = jwt.sign(data, jwt_key);
         res.json({authToken});
     }
     catch(error){
@@ -85,7 +86,7 @@ router.post('/getuser' , fetchuser , async (req, res) => {
     try {
        
           const user = await User.findById(req.user.id).select('-password');
-          res.json({user});
+          res.send(user);
     }
     catch(error){
 

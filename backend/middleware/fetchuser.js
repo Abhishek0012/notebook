@@ -2,7 +2,7 @@ var jwt = require('jsonwebtoken');
 const jwt_key = 'AbhishekTyagi'
 
 const fetchuser = (req, res, next) => {
-    const token = req.body('auth-token');
+    const token = req.header('auth-token');
     if (!token) {
         res.status(400).send("Enter valid authenthication token");
     }
@@ -13,6 +13,5 @@ const fetchuser = (req, res, next) => {
     } catch (error) {
         res.status(400).send("Enter valid authenthication token");
     }
-    next();
 }
 module.exports = fetchuser
