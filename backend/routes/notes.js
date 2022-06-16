@@ -51,4 +51,18 @@ router.post('/updatenote/:id', fetchuser, [
     }
 
 })
+router.delete('/deletenote/:id', fetchuser, [
+], async (req, res) => {
+    try {
+      let note = await notes.findById(req.params.id);
+      if(!note) res.status('401').send("Note not found");
+      if(note.user.toString()!== req.user.id)  res.status('401').send("Not Allowed");
+      notes.findByIdAndDelete(req.params.id);
+      res.send("Deleted");
+
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+
+})
 module.exports = router 
