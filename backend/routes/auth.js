@@ -42,7 +42,7 @@ router.post('/createuser', [
 
     } catch (error) {
         // console.error(error.message);
-        res.json(error.message);
+        res.json("hello");
         res.status(500).send("Some error has been occured")
     }
 })
